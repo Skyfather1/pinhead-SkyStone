@@ -15,6 +15,8 @@ public class OverallOPMode extends LinearOpMode {
     private DcMotor motorDriveLifter;
     private Servo GripServo;
     private Servo trayDragServo;
+    //public class (TrueWorkingOpMode)
+
 
     @Override
     public void runOpMode() {
@@ -26,9 +28,11 @@ public class OverallOPMode extends LinearOpMode {
         GripServo = hardwareMap.servo.get("GripServo");
         trayDragServo = hardwareMap.servo.get("trayDragServo");
         waitForStart();
-        if (opModeIsActive()) {
-            runOpMode(TrueWorkingOpMode);
-        }
+            //while (opModeIsActive());
+
+            //do {
+                //runOpMode();
+                //}
     }
 }
 

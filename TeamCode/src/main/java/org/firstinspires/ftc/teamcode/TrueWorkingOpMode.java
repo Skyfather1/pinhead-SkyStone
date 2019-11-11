@@ -12,7 +12,7 @@ public abstract class TrueWorkingOpMode extends LinearOpMode {
     private DcMotor motorDriveRight;
     private Servo GripServo;
 
-    public TrueWorkingOpMode () {
+    public void TrueWorkingOpMode () {
             motorDriveLeft = hardwareMap.dcMotor.get("motorDriveLeft");
             motorDriveRight = hardwareMap.dcMotor.get("motorDriveRight");
             GripServo = hardwareMap.servo.get("GripServo");

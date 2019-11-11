@@ -22,9 +22,9 @@ public class StrafingTestOPMode extends LinearOpMode {
         motorDriveBackRight = hardwareMap.dcMotor.get("motorDriveBackRight");
         motorDriveFrontLeft = hardwareMap.dcMotor.get("motorDriveFrontLeft");
         motorDriveFrontRight = hardwareMap.dcMotor.get("motorDriveFrontRight");
-        motorDriveLifter = hardwareMap.dcMotor.get("motorDriveLifter");
+        //motorDriveLifter = hardwareMap.dcMotor.get("motorDriveLifter");
         GripServo = hardwareMap.servo.get("GripServo");
-        trayDragServo = hardwareMap.servo.get("trayDragServo");
+        //trayDragServo = hardwareMap.servo.get("trayDragServo");
         waitForStart();
         if (opModeIsActive()) {
             motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -34,14 +34,14 @@ public class StrafingTestOPMode extends LinearOpMode {
             GripServo.setPosition(.5);
             while (opModeIsActive()) {
                 if (opModeIsActive()) {
-                    motorDriveBackLeft.setPower(-gamepad1.right_stick_y * 1);
-                    motorDriveBackRight.setPower(gamepad1.right_stick_y * 1);
-                    motorDriveFrontRight.setPower(gamepad1.right_stick_y * 1);
-                    motorDriveFrontLeft.setPower(-gamepad1.right_stick_y * 1);
-                    motorDriveBackLeft.setPower(gamepad1.right_stick_x * 1);
-                    motorDriveBackRight.setPower(gamepad1.right_stick_x * 1);
-                    motorDriveFrontRight.setPower(gamepad1.right_stick_x * 1);
-                    motorDriveFrontLeft.setPower(gamepad1.right_stick_x * 1);
+                    motorDriveBackLeft.setPower(-gamepad1.right_stick_y * 0.5);
+                    motorDriveBackRight.setPower(gamepad1.right_stick_y * 0.5);
+                    motorDriveFrontRight.setPower(gamepad1.right_stick_y * 0.5);
+                    motorDriveFrontLeft.setPower(-gamepad1.right_stick_y * 0.5);
+                    motorDriveBackLeft.setPower(gamepad1.right_stick_x * 0.5);
+                    motorDriveBackRight.setPower(gamepad1.right_stick_x * 0.5);
+                    motorDriveFrontRight.setPower(gamepad1.right_stick_x * 0.5);
+                    motorDriveFrontLeft.setPower(gamepad1.right_stick_x * 0.5);
                 }
                 if (gamepad1.left_bumper) {
                     GripServo.setPosition(.25);
