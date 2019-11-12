@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name = "StrafingTestOPMode", group = "")
-public class StrafingTestOPMode extends LinearOpMode {
+@TeleOp(name = "Wack AF", group = "")
+public class satanControles extends LinearOpMode {
 
     private DcMotor motorDriveBackLeft;
     private DcMotor motorDriveBackRight;
@@ -31,7 +31,6 @@ public class StrafingTestOPMode extends LinearOpMode {
             motorDriveBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorDriveFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorDriveFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            GripServo.setPosition(.5);
 
             while (opModeIsActive()) {
 
