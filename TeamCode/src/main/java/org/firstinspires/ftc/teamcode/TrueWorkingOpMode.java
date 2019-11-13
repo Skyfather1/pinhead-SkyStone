@@ -36,3 +36,12 @@ public abstract class TrueWorkingOpMode extends LinearOpMode {
             }
     }
 }
+/*
+rt forward
+lt back
+lstick turn
+strafeing bumpers
+dpad updown lift
+y traydragservo
+x grip
+ */

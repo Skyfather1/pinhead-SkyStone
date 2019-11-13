@@ -37,15 +37,15 @@ public class StrafingTestOPMode extends LinearOpMode {
 
                 if (opModeIsActive()) {
 
-                    motorDriveBackLeft.setPower(-gamepad1.right_stick_y * 0.25);
-                    motorDriveBackRight.setPower(gamepad1.right_stick_y * 0.25);
-                    motorDriveFrontRight.setPower(-gamepad1.right_stick_y * 0.25);
-                    motorDriveFrontLeft.setPower(gamepad1.right_stick_y * 0.25);
+                    motorDriveBackLeft.setPower(-gamepad1.right_stick_y * 0.125);
+                    motorDriveBackRight.setPower(gamepad1.right_stick_y * 0.125);
+                    motorDriveFrontRight.setPower(-gamepad1.right_stick_y * 0.125);
+                    motorDriveFrontLeft.setPower(gamepad1.right_stick_y * 0.125);
 
-                    motorDriveBackLeft.setPower(gamepad1.right_stick_x * 0.25);
-                    motorDriveBackRight.setPower(gamepad1.right_stick_x * 0.25);
-                    motorDriveFrontRight.setPower(gamepad1.right_stick_x * 0.25);
-                    motorDriveFrontLeft.setPower(gamepad1.right_stick_x * 0.25);
+                    motorDriveBackLeft.setPower(gamepad1.right_stick_x * 0.125);
+                    motorDriveBackRight.setPower(gamepad1.right_stick_x * 0.125);
+                    motorDriveFrontRight.setPower(gamepad1.right_stick_x * 0.125);
+                    motorDriveFrontLeft.setPower(gamepad1.right_stick_x * 0.125);
                 }
                 if (gamepad1.left_bumper) {
                     GripServo.setPosition(.25);
