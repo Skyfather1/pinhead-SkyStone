@@ -1,5 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
+/**
+ * Author: Daan Stevenson
+ * Created: 11/16/19
+ * Goal: Move the elevator in discrete steps
+ * Motor is controlled by REV Spark Mini
+ * Limit switch is used to locate lowest position
+ */
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
@@ -7,18 +15,17 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp
+@TeleOp(name = "Elevator", group = "")
 
 public class Elevator extends LinearOpMode {
 
     // initialize I/O
     private DcMotorSimple motorElevator;
     private DigitalChannel digElevatorLimit;
-
+    // runtime variable
     private ElapsedTime elevatorRuntime = new ElapsedTime();
 
     @Override
-
     public void runOpMode() {
 
         // reference Configuration variables
@@ -34,7 +41,7 @@ public class Elevator extends LinearOpMode {
             motorElevator.setPower(-0.4);
         }
         motorElevator.setPower(0);
-        double elevatorInput = 0;
+        float elevatorInput = 0;
 
         // Setup an integer to define block level
         // 0 = lowest (on ground)
@@ -44,8 +51,10 @@ public class Elevator extends LinearOpMode {
         boolean gamepad_press = false;
         double level_duration = 600;
 
+        // initializing telemetry
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
@@ -115,15 +124,16 @@ public class Elevator extends LinearOpMode {
             // manual joystick control (disabled)
             // double elevatorInput = -gamepad1.left_stick_y;
 
-            // if the digital channel returns true it's HIGH and the button is depressed.
-            // Turn off elevator motor
+            // if limit switch is depressed, elevator can only raise and level is set to 0
             if (digElevatorLimit.getState() == true) {
                 elevatorInput = Range.clip(elevatorInput, 0, 1);
                 elevatorLevel = 0;
             }
 
+            // set elevator motor speed
             motorElevator.setPower(elevatorInput);
 
+            // telemetry update
             telemetry.addData("Status", "Running");
             telemetry.addData("Desired elevator Level", String.valueOf(elevatorDesiredLevel));
             telemetry.addData("Elevator Level", String.valueOf(elevatorLevel));
