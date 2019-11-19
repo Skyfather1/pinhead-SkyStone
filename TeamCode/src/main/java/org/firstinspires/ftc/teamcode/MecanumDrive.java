@@ -22,6 +22,9 @@ public class MecanumDrive extends LinearOpMode {
     private DcMotor motorDriveFrontLeft;
     private DcMotor motorDriveFrontRight;
 
+    // slow mode string
+    private String slow_mode = "DISENGAGED";
+
     @Override
     public void runOpMode() {
 
@@ -40,25 +43,26 @@ public class MecanumDrive extends LinearOpMode {
         // initializing telemetry
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        float slowDownCoeff = 1;
         // coefficients
         boolean isPressed = false;
+        float slowDownCoeff = 1;
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
+            // logic to engage slow mode (no debounce)
             if (gamepad1.left_bumper == true)
             {
                 if (isPressed == false) {
                     if (slowDownCoeff == 1){
-                        slowDownCoeff = 0.5;
-                        telemetry.addData("Slow Mode", "ENGAGED");
+                        slowDownCoeff = (float) 0.3;
+                        slow_mode = "ENGAGED";
                     }
                     else {
-                        slowDownCoeff = 1;
-                        telemetry.addData("Slow Mode", "DISENGAGED");
+                        slowDownCoeff = (float) 1;
+                        slow_mode = "DISENGAGED";
                     }
 
                 }
@@ -70,11 +74,12 @@ public class MecanumDrive extends LinearOpMode {
             }
 
             // load inputs from gamepad
-            float for_bak = - (gamepad1.right_stick_y + gamepad1.left_stick_y); // raise power to 3 or 5!!
+            float for_bak = - (gamepad1.right_stick_y + gamepad1.left_stick_y);
             for_bak = Range.clip (for_bak, -1, 1);
             float crab = gamepad1.right_stick_x;
             float rotate = gamepad1.left_stick_x;
 
+            // raise power to improve low level stick response
             for_bak = (float) Math.pow ( for_bak, 5);
             crab = (float) Math.pow ( crab, 5);
             rotate = (float) Math.pow ( rotate , 7);
@@ -110,6 +115,7 @@ public class MecanumDrive extends LinearOpMode {
 
             // telemetry update
             telemetry.addData("Status", "Running");
+            telemetry.addData("Slow Mode", slow_mode);
             telemetry.update();
 
         }
