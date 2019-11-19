@@ -40,15 +40,34 @@ public class MecanumDrive extends LinearOpMode {
         // initializing telemetry
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-
-        // coefficients
         float slowDownCoeff = 1;
-
+        // coefficients
+        boolean isPressed = false;
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+
+            if (gamepad1.left_bumper == true)
+            {
+                if (isPressed == false) {
+                    if (slowDownCoeff == 1){
+                        slowDownCoeff = 0.5;
+                        telemetry.addData("Slow Mode", "ENGAGED");
+                    }
+                    else {
+                        slowDownCoeff = 1;
+                        telemetry.addData("Slow Mode", "DISENGAGED");
+                    }
+
+                }
+            }
+            else{
+                if (isPressed == true){
+                    isPressed = false;
+                }
+            }
 
             // load inputs from gamepad
             float for_bak = - (gamepad1.right_stick_y + gamepad1.left_stick_y); // raise power to 3 or 5!!
