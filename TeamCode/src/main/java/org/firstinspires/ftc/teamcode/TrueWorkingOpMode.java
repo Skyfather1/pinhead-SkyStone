@@ -24,10 +24,8 @@ public abstract class TrueWorkingOpMode extends LinearOpMode {
                 motorDriveRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 GripServo.setPosition(.5);
                 while (opModeIsActive()) {
-                    if (opModeIsActive()) {
-                        motorDriveLeft.setPower(-gamepad1.left_stick_y * .714285);
-                        motorDriveRight.setPower(gamepad1.right_stick_y * 1);
-                    }
+                    motorDriveLeft.setPower(-gamepad1.left_stick_y * .714285);
+                    motorDriveRight.setPower(gamepad1.right_stick_y * 1);
                     if (gamepad1.left_bumper) {
                         GripServo.setPosition(.25);
                     } else {
