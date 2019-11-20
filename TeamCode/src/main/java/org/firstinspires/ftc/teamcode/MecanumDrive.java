@@ -64,13 +64,11 @@ public class MecanumDrive extends LinearOpMode {
                         slowDownCoeff = (float) 1;
                         slow_mode = "DISENGAGED";
                     }
-
+                    isPressed = true;
                 }
             }
             else{
-                if (isPressed == true){
-                    isPressed = false;
-                }
+                isPressed = false;
             }
 
             // load inputs from gamepad
