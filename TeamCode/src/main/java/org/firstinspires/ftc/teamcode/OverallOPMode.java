@@ -28,11 +28,6 @@ public class OverallOPMode extends LinearOpMode {
         GripServo = hardwareMap.servo.get("GripServo");
         trayDragServo = hardwareMap.servo.get("trayDragServo");
         waitForStart();
-            //while (opModeIsActive());
 
-            //do {
-                //runOpMode();
-                //}
     }
 }
-
