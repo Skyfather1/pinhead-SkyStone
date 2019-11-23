@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 /**
  * Author: Big Brother
  * Created: Before Time
- * Goal: EVERYTHING!!!
+ * Goal: Control space and time.
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
