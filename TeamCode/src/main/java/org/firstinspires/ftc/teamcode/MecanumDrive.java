@@ -51,28 +51,24 @@ public class MecanumDrive extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-
             // logic to engage slow mode (no debounce)
-            if (gamepad1.left_bumper == true)
-            {
-                if (isPressed == false) {
+            if (gamepad1.left_bumper) {
+                if (!isPressed) {
                     if (slowDownCoeff == 1){
-                        slowDownCoeff = (float) 0.3;
+                        slowDownCoeff = 0.3;
                         slow_mode = "ENGAGED";
-                    }
-                    else {
-                        slowDownCoeff = (float) 1;
+                    } else {
+                        slowDownCoeff = 1.0;
                         slow_mode = "DISENGAGED";
                     }
                     isPressed = true;
                 }
-            }
-            else{
+            } else {
                 isPressed = false;
             }
 
             // load inputs from gamepad
-            float for_bak = - (gamepad1.right_stick_y + gamepad1.left_stick_y);
+            float for_bak = -(gamepad1.right_stick_y + gamepad1.left_stick_y);
             for_bak = Range.clip (for_bak, -1, 1);
             float crab = gamepad1.right_stick_x;
             float rotate = gamepad1.left_stick_x;
@@ -120,4 +116,3 @@ public class MecanumDrive extends LinearOpMode {
 
     }
 }
-
