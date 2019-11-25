@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode;
  * Goal: Move the elevator in discrete steps
  * Motor is controlled by REV Spark Mini
  * Limit switch is used to locate lowest position
+ * Currently Non-Functional - error = "Stuck in stop() -- may be servo?"
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
