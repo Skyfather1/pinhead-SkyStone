@@ -55,10 +55,10 @@ public class MecanumDrive extends LinearOpMode {
             if (gamepad1.left_bumper) {
                 if (!isPressed) {
                     if (slowDownCoeff == 1){
-                        slowDownCoeff = 0.3;
+                        slowDownCoeff = (float)0.3;
                         slow_mode = "ENGAGED";
                     } else {
-                        slowDownCoeff = 1.0;
+                        slowDownCoeff = (float)1.0;
                         slow_mode = "DISENGAGED";
                     }
                     isPressed = true;
