@@ -96,16 +96,16 @@ public class MecanumDrive extends LinearOpMode {
             rightFront = rightFront/maxDrive;
             leftRear = leftRear/maxDrive;
             rightRear = rightRear/maxDrive;
-            // leftFront = Range.clip(leftFront, -1, 1);
-            // rightFront = Range.clip(rightFront, -1, 1);
-            // leftRear = Range.clip(leftRear, -1, 1);
-            // rightRear = Range.clip(rightRear, -1, 1);
+            /*leftFront = Range.clip(leftFront, -1, 1);
+            rightFront = Range.clip(rightFront, -1, 1);
+            leftRear = Range.clip(leftRear, -1, 1);
+            rightRear = Range.clip(rightRear, -1, 1);*/
 
             // set motor powers
-            motorDriveBackLeft.setPower(leftRear * slowDownCoeff * 1);
-            motorDriveBackRight.setPower(rightRear * slowDownCoeff * 1);
-            motorDriveFrontLeft.setPower(leftFront * slowDownCoeff * 1);
-            motorDriveFrontRight.setPower(rightFront * slowDownCoeff * 1);
+            motorDriveBackLeft.setPower(leftRear * slowDownCoeff);
+            motorDriveBackRight.setPower(rightRear * slowDownCoeff);
+            motorDriveFrontLeft.setPower(leftFront * slowDownCoeff);
+            motorDriveFrontRight.setPower(rightFront * slowDownCoeff);
 
             // telemetry update
             telemetry.addData("Status", "Running");
