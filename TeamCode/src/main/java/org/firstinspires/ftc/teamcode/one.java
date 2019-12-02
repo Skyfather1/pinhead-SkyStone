@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode;
  * Goal: Control space and time.
  */
 
+/*
  import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  import com.qualcomm.robotcore.hardware.DcMotor;
@@ -43,4 +44,4 @@ public class one extends LinearOpMode {
             mover.drive(gamepad1);
         }
     }
-}
+}*/
