@@ -40,12 +40,13 @@ public class MecanumDrive extends LinearOpMode {
         motorDriveFrontLeft.setDirection(DcMotor.Direction.FORWARD);
         motorDriveFrontRight.setDirection(DcMotor.Direction.REVERSE);
 
+        // coefficients
+        boolean slow_pressed = false;
+        float slowDownCoeff = 1;
+
         // initializing telemetry
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        // coefficients
-        boolean isPressed = false;
-        float slowDownCoeff = 1;
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
@@ -53,7 +54,7 @@ public class MecanumDrive extends LinearOpMode {
         while (opModeIsActive()) {
             // logic to engage slow mode (no debounce)
             if (gamepad1.left_bumper) {
-                if (!isPressed) {
+                if (!slow_pressed) {
                     if (slowDownCoeff == 1){
                         slowDownCoeff = (float)0.3;
                         slow_mode = "ENGAGED";
@@ -61,10 +62,10 @@ public class MecanumDrive extends LinearOpMode {
                         slowDownCoeff = (float)1.0;
                         slow_mode = "DISENGAGED";
                     }
-                    isPressed = true;
+                    slow_pressed = true;
                 }
             } else {
-                isPressed = false;
+                slow_pressed = false;
             }
 
             // load inputs from gamepad
