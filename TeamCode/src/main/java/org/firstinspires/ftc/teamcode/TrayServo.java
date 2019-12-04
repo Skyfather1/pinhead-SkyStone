@@ -18,7 +18,7 @@ public class TrayServo extends LinearOpMode {
     Servo   servoTray;
     double tray_up = 0.5;
     double tray_down = 0.6;
-    boolean gamepad_press = false;
+    boolean tray_press = false;
 
     // slow mode string
     private String tray_state = "UP";
@@ -42,22 +42,22 @@ public class TrayServo extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            // elevator set level logic
-            if (gamepad_press == false) {
+            // tray servo logic & control
+            if (tray_press == false) {
                 if (gamepad1.y == true) {
                     servoTray.setPosition(tray_up);
                     tray_state = "UP";
-                    gamepad_press = true;
+                    tray_press = true;
                 } else if (gamepad1.a == true) {
                     servoTray.setPosition(tray_down);
                     tray_state = "DOWN";
-                    gamepad_press = true;
+                    tray_press = true;
                 } else {
-                    gamepad_press = false;
+                    tray_press = false;
                 }
             } else{
-                if (gamepad1.dpad_up == false && gamepad1.dpad_down == false){
-                    gamepad_press = false;
+                if (gamepad1.y == false && gamepad1.a == false){
+                    tray_press = false;
                 }
             }
 

@@ -1,4 +1,4 @@
-/*public class move extends LinearOpMode {
+/*public class move {
     private DcMotor motorFL;
     private DcMotor motorFR;
     private DcMotor motorBL;
@@ -12,4 +12,5 @@
     public void drive(Gamepad gamepad1) {
         //code soon to come!
     }
-}*/
+}
+*/

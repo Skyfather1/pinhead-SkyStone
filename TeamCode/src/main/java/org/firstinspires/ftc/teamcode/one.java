@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode;
  * Goal: Control space and time.
  */
 
+/*
  import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  import com.qualcomm.robotcore.hardware.DcMotor;
@@ -18,7 +19,7 @@ public class one extends LinearOpMode {
     //OwO whats this??
     @Override
     public void runOpMode() {
-        //Ni-chan! Dont forget hardware.
+        //Ni-chan! Don't forget hardware.
         motorFL = hardwareMap.dcMotor.get("motorDriveFrontLeft");
         motorFR = hardwareMap.dcMotor.get("motorDriveFrontRight");
         motorBL = hardwareMap.dcMotor.get("motorDriveBackLeft");
@@ -31,7 +32,7 @@ public class one extends LinearOpMode {
         motorBR.setDirection(DcMotor.Direction.FORWARD);
 
         //init move class.
-        move mover = new move();
+        move mover = new move(motorFL, motorFR, motorBL, motorBR);
 
         //Console.log for java ftc bull****
         telemetry.addData("Status", "Initialized");
@@ -43,4 +44,4 @@ public class one extends LinearOpMode {
             mover.drive(gamepad1);
         }
     }
-}
+}*/
