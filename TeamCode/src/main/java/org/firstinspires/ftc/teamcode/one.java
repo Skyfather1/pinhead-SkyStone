@@ -6,11 +6,11 @@ package org.firstinspires.ftc.teamcode;
  * Goal: Control space and time.
  */
 
-/*
- import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
- import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
- import com.qualcomm.robotcore.hardware.DcMotor;
- import com.qualcomm.robotcore.util.Range;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "One (thing to rule them all)", group = "")
 
@@ -19,17 +19,23 @@ public class one extends LinearOpMode {
     //OwO whats this??
     @Override
     public void runOpMode() {
-        //Ni-chan! Don't forget hardware.
-        motorFL = hardwareMap.dcMotor.get("motorDriveFrontLeft");
-        motorFR = hardwareMap.dcMotor.get("motorDriveFrontRight");
-        motorBL = hardwareMap.dcMotor.get("motorDriveBackLeft");
-        motorBR = hardwareMap.dcMotor.get("motorDriveBackRight");
+
+
+
+        //This is how to set up our motors to run with contollers
+        //motorBL.setMode(DcMotorController.RunMode.RESET_ENCODER)
+        //motorBL.setMode(DcMotorController.RunMode.RUN_WITH_ENCODERS)
+
+        //This is how you get the current rotations of the encoder
+        //motorBL.getCurrentPosition();
+        /*
+        So, the plan is to take one wheel(maybe the slowest) and set this wheel as a
+        baseline to set the speed for all the other wheels using ratios to get acurate numbers
+        :)
+        */
 
         //Wow much motor going ways.
-        motorFL.setDirection(DcMotor.Direction.FORWARD);
-        motorFR.setDirection(DcMotor.Direction.REVERSE);
-        motorBL.setDirection(DcMotor.Direction.REVERSE);
-        motorBR.setDirection(DcMotor.Direction.FORWARD);
+
 
         //init move class.
         move mover = new move(motorFL, motorFR, motorBL, motorBR);
@@ -44,4 +50,4 @@ public class one extends LinearOpMode {
             mover.drive(gamepad1);
         }
     }
-}*/
+}
