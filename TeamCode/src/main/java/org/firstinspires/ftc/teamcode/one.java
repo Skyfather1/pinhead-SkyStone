@@ -30,7 +30,7 @@ public class one extends LinearOpMode {
         // OwO Await big red buttion press.
         waitForStart();
         while (opModeIsActive()) {
-
+            robot.drive((float)1)
         }
     }
 }
