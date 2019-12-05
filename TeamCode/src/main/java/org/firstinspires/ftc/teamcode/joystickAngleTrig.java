@@ -1,4 +1,5 @@
 //I promace this will do something usefull please dont delete my code!!!
+/*
 import Java.lang.Math;
 
 public class joystickAngleTrig {
@@ -16,3 +17,4 @@ public class joystickAngleTrig {
         this.y = stickY;
     }
 }
+*/
