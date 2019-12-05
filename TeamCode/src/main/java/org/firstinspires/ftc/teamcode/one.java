@@ -20,8 +20,7 @@ public class one extends LinearOpMode {
     @Override
     public void runOpMode() {
         //init move class.
-        Robot robot = new Robot();
-        robot.init(hardwareMap);
+        Robot robot = new Robot(hardwareMap);
 
         //Console.log for java ftc bull****
         telemetry.addData("Say", "Hello World!");

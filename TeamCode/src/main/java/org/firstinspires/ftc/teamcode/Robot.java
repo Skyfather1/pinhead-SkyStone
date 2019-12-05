@@ -9,11 +9,7 @@ public class Robot {
     private DcMotor motorBR;
 
     HardwareMap hardwareMap = null;
-    public Robot() {
-
-    }
-    public void init(HardwareMap ahwMap) {
-
+    public Robot(HardwareMap ahwMap) {
         //Ni-chan! Don't forget hardware.
         this.motorFL = hardwareMap.get(DcMotor.class, "motorDriveFrontLeft");
         this.motorFR = hardwareMap.get(DcMotor.class, "motorDriveFrontRight");
