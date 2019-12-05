@@ -19,35 +19,19 @@ public class one extends LinearOpMode {
     //OwO whats this??
     @Override
     public void runOpMode() {
-
-
-
-        //This is how to set up our motors to run with contollers
-        //motorBL.setMode(DcMotorController.RunMode.RESET_ENCODER)
-        //motorBL.setMode(DcMotorController.RunMode.RUN_WITH_ENCODERS)
-
-        //This is how you get the current rotations of the encoder
-        //motorBL.getCurrentPosition();
-        /*
-        So, the plan is to take one wheel(maybe the slowest) and set this wheel as a
-        baseline to set the speed for all the other wheels using ratios to get acurate numbers
-        :)
-        */
-
-        //Wow much motor going ways.
-
-
         //init move class.
-        move mover = new move(motorFL, motorFR, motorBL, motorBR);
+        Robot robot = new Robot();
+        robot.init(hardwareMap);
 
         //Console.log for java ftc bull****
+        telemetry.addData("Say", "Hello World!");
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
         // OwO Await big red buttion press.
         waitForStart();
         while (opModeIsActive()) {
-            mover.drive(gamepad1);
+
         }
     }
 }
