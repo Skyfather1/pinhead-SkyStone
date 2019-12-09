@@ -13,7 +13,7 @@ public class Robot {
 
     HardwareMap hardwareMap = null;
     public Robot(HardwareMap ahwMap, Gamepad gamepad1) {
-        //controler
+        //controller
         this.gamepad = gamepad1;
         //Ni-chan! Don't forget hardware.
         this.motorFL = hardwareMap.get(DcMotor.class, "motorDriveFrontLeft");
