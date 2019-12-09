@@ -10,6 +10,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "???", group = "")
 
@@ -26,7 +27,7 @@ public class DriveOnRobot extends LinearOpMode {
     @Override
     public void runOpMode() {
         //init move class.
-        Robot robot = new Robot(hardwareMap, gamepad1);
+        Robot robot = new Robot(hardwareMap);
 
         //Console.log for java ftc bull****
         telemetry.addData("Say", "Hello World!");
