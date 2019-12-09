@@ -9,12 +9,9 @@ public class Robot {
     private DcMotor motorFR;
     private DcMotor motorBL;
     private DcMotor motorBR;
-    private Gamepad gamepad;
 
-    HardwareMap hardwareMap = null;
-    public Robot(HardwareMap ahwMap, Gamepad gamepad1) {
-        //controler
-        this.gamepad = gamepad1;
+    private HardwareMap hardwareMap = null;
+    public Robot(HardwareMap ahwMap) {
         //Ni-chan! Don't forget hardware.
         this.motorFL = hardwareMap.get(DcMotor.class, "motorDriveFrontLeft");
         this.motorFR = hardwareMap.get(DcMotor.class, "motorDriveFrontRight");
@@ -28,15 +25,9 @@ public class Robot {
     }
 
     //Driver for the mecanum wheels set as a function.
-    public void drive(float motorMove) {
-        //Make sure can be slower cause might not work.
+    public void mDrive(goPlaces, rotate, sideToSide, float motorMove) {
         motorMove = (motorMove > 1) ? 1 : motorMove;
         motorMove = (motorMove < 0) ? 0 : motorMove;
-
-        //condition ? if true : if fails;
-        float goPlaces = (float) Math.pow(Range.clip(-(gamepad.right_trigger - gamepad.left_trigger), -1, 1), 5);
-        float rotate = (float) ((gamepad.right_bumper ? 1 : 0) - (gamepad.left_bumper ? 1 : 0));
-        float sideToSide = (float) Math.pow(gamepad1.left_stick_x, 5);
 
         //Combos for mecanum wheels HH→NK
         float toMotorFL = goPlaces + sideToSide + rotate;

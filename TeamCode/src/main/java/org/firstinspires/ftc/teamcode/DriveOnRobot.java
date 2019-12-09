@@ -12,11 +12,18 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "One (thing to rule them all)", group = "")
+@TeleOp(name = "???", group = "")
 
 //Do you even java.
-public class one extends LinearOpMode {
+public class DriveOnRobot extends LinearOpMode {
     //OwO whats this??
+
+    //condition ? if true : if fails;
+    float goPlaces;
+    float rotate;
+    float sideToSide;
+
+
     @Override
     public void runOpMode() {
         //init move class.
@@ -30,7 +37,10 @@ public class one extends LinearOpMode {
         // OwO Await big red buttion press.
         waitForStart();
         while (opModeIsActive()) {
-            robot.drive((float)1)
+            goPlaces = (float) Math.pow(Range.clip(-(gamepad.right_trigger - gamepad.left_trigger), -1, 1), 5);
+            rotate = (float) ((gamepad.right_bumper ? 1 : 0) - (gamepad.left_bumper ? 1 : 0));
+            sideToSide = (float) Math.pow(gamepad1.left_stick_x, 5);
+            robot.Drive(goPlaces, rotate, sideToSide, (float)1)
         }
     }
 }
