@@ -25,7 +25,7 @@ public class Robot {
     }
 
     //Driver for the mecanum wheels set as a function.
-    public void mDrive(goPlaces, rotate, sideToSide, float motorMove) {
+    public void mDrive(float goPlaces, float rotate, float sideToSide, float motorMove) {
         motorMove = (motorMove > 1) ? 1 : motorMove;
         motorMove = (motorMove < 0) ? 0 : motorMove;
 
