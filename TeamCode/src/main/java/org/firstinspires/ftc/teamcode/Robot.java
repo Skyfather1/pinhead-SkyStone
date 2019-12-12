@@ -12,6 +12,7 @@ public class Robot {
 
     private HardwareMap hardwareMap = null;
     public Robot(HardwareMap ahwMap) {
+        hardwareMap = ahwMap
         //Ni-chan! Don't forget hardware.
         motorFL = hardwareMap.get(DcMotor.class, "motorDriveFrontLeft");
         motorFR = hardwareMap.get(DcMotor.class, "motorDriveFrontRight");

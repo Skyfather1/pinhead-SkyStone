@@ -12,25 +12,25 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "???", group = "")
+@TeleOp(name = "DriveOnRobot", group = "")
 
 //Do you even java.
 public class DriveOnRobot extends LinearOpMode {
     //OwO whats this??
 
     //condition ? if true : if fails;
-    float goPlaces;
-    float rotate;
-    float sideToSide;
+    private float goPlaces;
+    private float rotate;
+    private float sideToSide;
 
 
     @Override
     public void runOpMode() {
+        //Console.log for java ftc bull****
+        telemetry.addData("Say", "Hello World!");
         //init move class.
         Robot robot = new Robot(hardwareMap);
 
-        //Console.log for java ftc bull****
-        telemetry.addData("Say", "Hello World!");
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
