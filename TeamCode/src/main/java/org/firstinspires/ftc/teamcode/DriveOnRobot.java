@@ -37,8 +37,8 @@ public class DriveOnRobot extends LinearOpMode {
         // OwO Await big red buttion press.
         waitForStart();
         while (opModeIsActive()) {
-            goPlaces = (float) Math.pow(Range.clip(-(gamepad.right_trigger - gamepad.left_trigger), -1, 1), 5);
-            rotate = (float) ((gamepad.right_bumper ? 1 : 0) - (gamepad.left_bumper ? 1 : 0));
+            goPlaces = (float) Math.pow(Range.clip(-(gamepad1.right_trigger - gamepad1.left_trigger), -1, 1), 5);
+            rotate = (float) ((gamepad1.right_bumper ? 1 : 0) - (gamepad1.left_bumper ? 1 : 0));
             sideToSide = (float) Math.pow(gamepad1.left_stick_x, 5);
             robot.Drive(goPlaces, rotate, sideToSide, (float)1)
         }
