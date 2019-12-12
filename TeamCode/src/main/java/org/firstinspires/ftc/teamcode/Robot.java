@@ -13,10 +13,10 @@ public class Robot {
     private HardwareMap hardwareMap = null;
     public Robot(HardwareMap ahwMap) {
         //Ni-chan! Don't forget hardware.
-        this.motorFL = hardwareMap.get(DcMotor.class, "motorDriveFrontLeft");
-        this.motorFR = hardwareMap.get(DcMotor.class, "motorDriveFrontRight");
-        this.motorBL = hardwareMap.get(DcMotor.class, "motorDriveBackLeft");
-        this.motorBR = hardwareMap.get(DcMotor.class, "motorDriveBackRight");
+        motorFL = hardwareMap.get(DcMotor.class, "motorDriveFrontLeft");
+        motorFR = hardwareMap.get(DcMotor.class, "motorDriveFrontRight");
+        motorBL = hardwareMap.get(DcMotor.class, "motorDriveBackLeft");
+        motorBR = hardwareMap.get(DcMotor.class, "motorDriveBackRight");
         //Set DIRECTION@MOVE.net
         this.motorFL.setDirection(DcMotor.Direction.FORWARD);
         this.motorFR.setDirection(DcMotor.Direction.REVERSE);
