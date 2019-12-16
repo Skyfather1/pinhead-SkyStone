@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 /**
- * Author: Big Brother
+ * Author: big brother
  * Created: Before Time
  * Goal: Control space and time.
  */
