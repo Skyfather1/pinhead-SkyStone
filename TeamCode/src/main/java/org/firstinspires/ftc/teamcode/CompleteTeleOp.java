@@ -11,9 +11,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @TeleOp(name = "CompleteTeleOp", group = "")
 
@@ -26,6 +29,7 @@ public class CompleteTeleOp extends LinearOpMode {
     private DcMotor motorDriveFrontRight;
     private DcMotorSimple motorElevator;
     private DigitalChannel digElevatorLimit;
+    private DistanceSensor sensorRange;
     Servo servoGripper;
     Servo   servoTray;
 
@@ -67,6 +71,7 @@ public class CompleteTeleOp extends LinearOpMode {
         digElevatorLimit = hardwareMap.get(DigitalChannel.class, "digElevatorLimit");
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
         servoTray = hardwareMap.get(Servo.class, "servoTray");
+        sensorRange = hardwareMap.get(DistanceSensor.class, "sensor_range");
 
         // set the digital channel to input.
         digElevatorLimit.setMode(DigitalChannel.Mode.INPUT);
@@ -82,14 +87,6 @@ public class CompleteTeleOp extends LinearOpMode {
         // initialize tray servo position
         servoGripper.setPosition(gripper_open);
         servoTray.setPosition(tray_up);
-
-        // Setup an integer to define block level
-        // 0 = lowest (on ground)
-        // 1 = up 1 block level
-        int elevatorLevel = 0;
-        int elevatorDesiredLevel = 0;
-        boolean elevator_press = false;
-        double level_duration = 600;
 
         // slow mode coefficients
         boolean slow_pressed = false;
@@ -159,81 +156,21 @@ public class CompleteTeleOp extends LinearOpMode {
             motorDriveFrontLeft.setPower(leftFront * slowDownCoeff);
             motorDriveFrontRight.setPower(rightFront * slowDownCoeff);
 
-
-
-            // elevator set level logic
-            if (elevator_press == false) {
-                if (gamepad1.dpad_up == true) {
-                    elevatorDesiredLevel++;
-                    elevator_press = true;
-                } else if (gamepad1.dpad_down == true) {
-                    elevatorDesiredLevel--;
-                    elevator_press = true;
-                } else {
-                    elevator_press = false;
-                }
-            } else{
-                if (gamepad1.dpad_up == false && gamepad1.dpad_down == false){
-                    elevator_press = false;
-                }
-            }
-            elevatorDesiredLevel = (int) Range.clip(elevatorDesiredLevel, 0, 3) ;
-
-            // elevator run logic
-            if (elevatorDesiredLevel > elevatorLevel) { // raise
-                if (elevatorInput == 0) { // initialize run
-                    elevatorRuntime.reset();
-                    elevatorInput = 1;
-                } else { // was already running
-                    if (elevatorRuntime.milliseconds() > level_duration) {
-                        if (elevatorInput > 0) { // rising
-                            elevatorLevel++;
-                        } else { // lowering
-                            elevatorLevel--;
-                        }
-                        elevatorInput = 0;
-                    }
-                }
-            } else if (elevatorDesiredLevel < elevatorLevel) { // lower
-                if (elevatorInput == 0) { // initialize run
-                    elevatorRuntime.reset();
-                    elevatorInput = -1;
-                } else { // was already running
-                    if (elevatorRuntime.milliseconds() > level_duration) {
-                        if (elevatorInput > 0) { // rising
-                            elevatorLevel++;
-                        } else { // lowering
-                            elevatorLevel--;
-                        }
-                        elevatorInput = 0;
-                    }
-                }
-            } else { // reset to desired level
-                if (elevatorInput != 0) { // running
-                    if (elevatorRuntime.milliseconds() > level_duration) {
-                        if (elevatorInput > 0) { // rising
-                            elevatorLevel++;
-                        } else { // lowering
-                            elevatorLevel--;
-                        }
-                        elevatorInput = 0;
-                    }
-                }
-            }
-
             // manual joystick control (disabled)
-            // double elevatorInput = -gamepad1.left_stick_y;
+            elevatorInput = gamepad1.right_trigger - gamepad1.left_trigger;
 
+            double elevator_height = sensorRange.getDistance(DistanceUnit.MM);
             // if limit switch is depressed, elevator can only raise and level is set to 0
             if (digElevatorLimit.getState() == true) {
                 elevatorInput = Range.clip(elevatorInput, 0, 1);
-                elevatorLevel = 0;
+            } else if (elevator_height > 255){
+                elevatorInput = Range.clip(elevatorInput, -1, 0);
+            } else if (elevator_height > 225){
+                elevatorInput = Range.clip(elevatorInput, -1, (float)0.4);
             }
 
             // set elevator motor speed
             motorElevator.setPower(elevatorInput);
-
-
 
             // gripper servo logic & control
             if (gripper_press == false) {
@@ -253,8 +190,6 @@ public class CompleteTeleOp extends LinearOpMode {
                     gripper_press = false;
                 }
             }
-
-
 
             // tray servo logic & control
             if (tray_press == false) {
@@ -277,10 +212,9 @@ public class CompleteTeleOp extends LinearOpMode {
 
             // telemetry update
             telemetry.addData("Status", "Running");
-            telemetry.addData("Desired elevator Level", String.valueOf(elevatorDesiredLevel));
-            telemetry.addData("Elevator Level", String.valueOf(elevatorLevel));
             telemetry.addData("Block Gripper", String.valueOf(gripper_state));
-            telemetry.addData("Tray servo", String.valueOf(tray_state));
+            telemetry.addData("Tray Servo", String.valueOf(tray_state));
+            telemetry.addData("Elevator Height", String.valueOf(elevator_height));
             telemetry.addData("Slow Mode", slow_mode);
             telemetry.update();
         }
