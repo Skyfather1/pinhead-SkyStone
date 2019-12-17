@@ -32,9 +32,14 @@ public class TrayServo extends LinearOpMode {
         // initialize tray servo position
         servoTray.setPosition(tray_up);
 
-        // initializing telemetry
+        //Things that probably make this run from Robot
+        telemetry.addData("Say", "Hello World!");
+
+        Robot robot = new Robot(hardwareMap);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+        //End things that probably make this run from Robot
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();

@@ -28,6 +28,7 @@ public class DriveOnRobot extends LinearOpMode {
     public void runOpMode() {
         //Console.log for java ftc bull****
         telemetry.addData("Say", "Hello World!");
+
         //init move class.
         Robot robot = new Robot(hardwareMap);
 
