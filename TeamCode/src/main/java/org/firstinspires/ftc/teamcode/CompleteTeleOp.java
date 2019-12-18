@@ -42,8 +42,8 @@ public class CompleteTeleOp extends LinearOpMode {
     private String gripper_state = "OPEN";
 
     // initialize I/O
-    double tray_up = 0.5;
-    double tray_down = 0.6;
+    double tray_up = 0.8;
+    double tray_down = 0.3;
     boolean tray_press = false;
     private String tray_state = "UP";
 
