@@ -33,16 +33,12 @@ public class DriveOnRobot extends LinearOpMode {
         Robot robot = new Robot(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
-        telemetry.update();
+        telemetry.update();z
 
         // OwO Await big red buttion press.
         waitForStart();
         while (opModeIsActive()) {
-<<<<<<< HEAD
             goPlaces = (float) gamepad1.right_trigger - gamepad1.left_trigger;
-=======
-            goPlaces = (float) Math.pow(Range.clip((gamepad1.right_trigger - gamepad1.left_trigger), -1, 1), 5);
->>>>>>> 98c24eff9b3b942d99ff113ba47e2ec06c8833cf
             rotate = (float) ((gamepad1.right_bumper ? 1 : 0) - (gamepad1.left_bumper ? 1 : 0));
             sideToSide = (float) gamepad1.left_stick_x;
             robot.drive(goPlaces, rotate, sideToSide, (float)1);
