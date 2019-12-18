@@ -12,7 +12,7 @@ public class Robot {
 
     private HardwareMap hardwareMap = null;
     public Robot(HardwareMap ahwMap) {
-        hardwareMap = ahwMap
+        hardwareMap = ahwMap;
         //Ni-chan! Don't forget hardware.
         motorFL = hardwareMap.get(DcMotor.class, "motorDriveFrontLeft");
         motorFR = hardwareMap.get(DcMotor.class, "motorDriveFrontRight");
@@ -27,6 +27,9 @@ public class Robot {
 
     //Driver for the mecanum wheels set as a function.
     public void drive(float goPlaces, float rotate, float sideToSide, float motorMove) {
+        goPlaces = (float) Math.pow(Range.clip(goPlaces, -1, 1), 5);
+        rotate = (float) Range.clip(rotate, -1, 1);
+        sideToSide = (float) Math.pow(Range.clip(sideToSide, -1, 1), 5);
         motorMove = (motorMove > 1) ? 1 : motorMove;
         motorMove = (motorMove < 0) ? 0 : motorMove;
 
