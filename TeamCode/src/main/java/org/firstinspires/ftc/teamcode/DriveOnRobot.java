@@ -33,7 +33,7 @@ public class DriveOnRobot extends LinearOpMode {
         Robot robot = new Robot(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
-        telemetry.update();z
+        telemetry.update();
 
         // OwO Await big red buttion press.
         waitForStart();
