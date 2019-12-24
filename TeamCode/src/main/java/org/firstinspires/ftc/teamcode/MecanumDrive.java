@@ -40,6 +40,18 @@ public class MecanumDrive extends LinearOpMode {
         motorDriveFrontLeft.setDirection(DcMotor.Direction.FORWARD);
         motorDriveFrontRight.setDirection(DcMotor.Direction.REVERSE);
 
+        // reset encoders
+        motorDriveBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorDriveBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorDriveFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorDriveFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        // use encoders
+        motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorDriveBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorDriveFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorDriveFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         // coefficients
         boolean slow_pressed = false;
         float slowDownCoeff = 1;
