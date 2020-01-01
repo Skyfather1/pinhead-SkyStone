@@ -26,7 +26,7 @@ public class DriveOnRobot extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        //Console.log for java ftc bull****
+        //Console.log for java ftc thonk
         telemetry.addData("Say", "Hello World!");
 
         //init move class.
