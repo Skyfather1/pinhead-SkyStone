@@ -10,6 +10,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -22,12 +26,27 @@ public class EncoderDrive extends LinearOpMode {
     private DcMotor motorDriveBackRight;
     private DcMotor motorDriveFrontLeft;
     private DcMotor motorDriveFrontRight;
+    private DcMotorSimple motorElevator;
+    private DigitalChannel digElevatorLimit;
+    private DistanceSensor sensorRange;
+    Servo servoGripper;
+    Servo   servoTray;
+
+    // gripper states
+    double gripper_open = 0.4;
+    double gripper_closed = 0.8;
+    private String gripper_state = "OPEN";
+
+    // initialize I/O
+    double tray_up = 0.8;
+    double tray_down = 0.3;
+    private String tray_state = "UP";
 
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double counts_per_inch = 753.2 / (3.1415 * 4);
-    static final double counts_per_degree = counts_per_inch * 18 * 3.1415 / 360;
-    static final double counts_per_inch_crab = counts_per_inch * 3;
+    static final double counts_per_degree = counts_per_inch * 24 * 3.1415 / 360;
+    static final double counts_per_inch_crab = counts_per_inch * 1;
 
     @Override
     public void runOpMode() {
@@ -44,24 +63,48 @@ public class EncoderDrive extends LinearOpMode {
         motorDriveFrontLeft.setDirection(DcMotor.Direction.FORWARD);
         motorDriveFrontRight.setDirection(DcMotor.Direction.REVERSE);
 
+        // reference Configuration variables
+        motorElevator = hardwareMap.get(DcMotorSimple.class, "motorElevator");
+        digElevatorLimit = hardwareMap.get(DigitalChannel.class, "digElevatorLimit");
+        servoGripper = hardwareMap.get(Servo.class, "servoGripper");
+        servoTray = hardwareMap.get(Servo.class, "servoTray");
+        sensorRange = hardwareMap.get(DistanceSensor.class, "sensor_range");
+
+        // set the digital channel to input.
+        digElevatorLimit.setMode(DigitalChannel.Mode.INPUT);
+        motorElevator.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        // lower elevator until limit switch is depressed
+        while (digElevatorLimit.getState() == false) {
+            motorElevator.setPower(-0.4);
+        }
+        motorElevator.setPower(0);
+        double elevatorInput = 0;
+
+        // initialize tray servo position
+        servoGripper.setPosition(gripper_open);
+        servoTray.setPosition(tray_up);
+
         // initializing telemetry
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // run until the end of the match (driver presses STOP)
-        while (opModeIsActive()) {
+        driveCrab(0.4,  -36,  10.0);  // S3: Crab right 10 Inches with 5 Sec timeout
+        //sleep(1000);     // pause for servos to move
+        tankTurn( 0.5, 180, 10.0);  // S2: Rotate 90 degrees right with 2 Sec timeout
+        //sleep(1000);     // pause for servos to move
+        driveStraight(0.5,  -24,  10.0);  // S1: Forward 10 Inches with 5 Sec timeout
+        //sleep(1000);     // pause for servos to move
+        servoTray.setPosition(tray_down);
+        sleep(2000);     // pause for servos to move
+        driveStraight(0.5,  24,  10.0);  // S1: Forward 10 Inches with 5 Sec timeout
 
-            driveStraight(0.5,  10,  5.0);  // S1: Forward 10 Inches with 5 Sec timeout
-            tankTurn( 0.3, 90, 2.0);  // S2: Rotate 90 degrees right with 2 Sec timeout
-            driveCrab(0.7,  10,  8.0);  // S3: Crab right 10 Inches with 5 Sec timeout
 
-            // telemetry update
-            telemetry.addData("Path", "Complete");
-            telemetry.update();
-
-        }
+        // telemetry update
+        telemetry.addData("Path", "Complete");
+        telemetry.update();
 
     }
 
@@ -108,7 +151,7 @@ public class EncoderDrive extends LinearOpMode {
                 // O X    X X    O X    O O
 
                 // Display it for the driver.
-                telemetry.addData("Driving straight",  "%4d inches", inches);
+                telemetry.addData("Driving straight",  String.valueOf(inches) + " inches");
                 telemetry.update();
             }
 
@@ -164,7 +207,7 @@ public class EncoderDrive extends LinearOpMode {
                 // O X    X X    O X    O O
 
                 // Display it for the driver.
-                telemetry.addData("Rotating",  "%4d degrees", degrees);
+                telemetry.addData("Rotating",  String.valueOf(degrees) + " degrees");
                 telemetry.update();
             }
 
@@ -221,7 +264,7 @@ public class EncoderDrive extends LinearOpMode {
                 // O X    X X    O X    O O
 
                 // Display it for the driver.
-                telemetry.addData("Crabbing","%4d inches", inches);
+                telemetry.addData("Crabbing",String.valueOf(inches) + " inches");
                 telemetry.update();
             }
 

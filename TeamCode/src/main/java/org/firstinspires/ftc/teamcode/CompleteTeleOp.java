@@ -36,9 +36,6 @@ public class CompleteTeleOp extends LinearOpMode {
     // slow mode string
     private String slow_mode = "DISENGAGED";
 
-    // runtime variable
-    private ElapsedTime elevatorRuntime = new ElapsedTime();
-
     // gripper states
     double gripper_open = 0.4;
     double gripper_closed = 0.8;
