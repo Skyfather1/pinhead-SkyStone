@@ -105,8 +105,10 @@ public class StopOnLine extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive() && downwardColorSensor.blue() < 2000) {
-            // Display reflected light.
-            driveStraight(0.3,  48,  20.0);  // S1: Forward 10 Inches with 5 Sec timeout
+            motorDriveBackLeft.setPower(0.25);
+            motorDriveBackRight.setPower(0.25);
+            motorDriveFrontLeft.setPower(0.25);
+            motorDriveFrontRight.setPower(0.25);
         }
         motorDriveBackLeft.setPower(0);
         motorDriveBackRight.setPower(0);
@@ -115,8 +117,10 @@ public class StopOnLine extends LinearOpMode {
         sleep(2000);
 
         while (opModeIsActive() && downwardColorSensor.red() < 2000) {
-            // Display reflected light.
-            driveStraight(0.3,  48,  20.0);  // S1: Forward 10 Inches with 5 Sec timeout
+            motorDriveBackLeft.setPower(0.25);
+            motorDriveBackRight.setPower(0.25);
+            motorDriveFrontLeft.setPower(0.25);
+            motorDriveFrontRight.setPower(0.25);
         }
         motorDriveBackLeft.setPower(0);
         motorDriveBackRight.setPower(0);
