@@ -5,24 +5,41 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.Range;
 
 public class Robot {
-    private DcMotor motorFL;
-    private DcMotor motorFR;
-    private DcMotor motorBL;
-    private DcMotor motorBR;
+    private DcMotor motorFL; //front left -1 to 1 forward and back
+    private DcMotor motorFR; //front right -1 to 1
+    private DcMotor motorBL; //back left -1 to 1
+    private DcMotor motorBR; //back right -1 to 1
+    private DcMotorSimple elevator; //elevator motor -1 to 1 to up or down.
+    private DigitalChannel elevatorLimit; //limmit switch at bottom
+    //distance sensor on elevator lower numbers at bottom
+    private DistanceSensor elevatorSensor;
+    Servo gripper;
+    Servo trayGrab;
 
     private HardwareMap hardwareMap = null;
-    public Robot(HardwareMap ahwMap) {
-        hardwareMap = ahwMap;
+    public Robot(HardwareMap hardwareMap_) {
+        hardwareMap = hardwareMap_;
         //Ni-chan! Don't forget hardware.
         motorFL = hardwareMap.get(DcMotor.class, "motorDriveFrontLeft");
         motorFR = hardwareMap.get(DcMotor.class, "motorDriveFrontRight");
         motorBL = hardwareMap.get(DcMotor.class, "motorDriveBackLeft");
         motorBR = hardwareMap.get(DcMotor.class, "motorDriveBackRight");
-        //Set DIRECTION@MOVE.net
+
+        elevator = hardwareMap.get(DcMotorSimple.class, "motorElevator");
+        elevatorLimit = hardwareMap.get(DigitalChannel.class, "digElevatorLimit");
+        elevatorSensor = hardwareMap.get(DistanceSensor.class, "sensor_range");
+
+        //
         this.motorFL.setDirection(DcMotor.Direction.FORWARD);
         this.motorFR.setDirection(DcMotor.Direction.REVERSE);
         this.motorBL.setDirection(DcMotor.Direction.REVERSE);
         this.motorBR.setDirection(DcMotor.Direction.FORWARD);
+
+        gripper = hardwareMap.get(Servo.class, "servoGripper");
+        trayGrab = hardwareMap.get(Servo.class, "servoTray");
+
+        elevator.setDirection(DcMotorSimple.Direction.REVERSE);
+        elevatorLimit.setMode(DigitalChannel.Mode.INPUT);
     }
 
     //Driver for the mecanum wheels set as a function.
@@ -58,5 +75,11 @@ public class Robot {
         motorFR.setPower(toMotorFR * motorMove);
         motorBL.setPower(toMotorBL * motorMove);
         motorBR.setPower(toMotorBR * motorMove);
+    }
+    public void elevator(float upDown) {
+
+    }
+    public void gripper(float upDown) {
+
     }
 }
