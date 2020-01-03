@@ -77,9 +77,12 @@ public class Robot {
         motorBR.setPower(toMotorBR * motorMove);
     }
     public void elevator(float upDown) {
-
+        upDown = Range.clip(upDown, -1, 1);
+        if((elevatorSensor.getDistance(DistanceUnit.MM) < 220 || upDown < 0) || (elevatorLimit.getState() != true || upDown > 0)) {
+            elevator.setPower(upDown);
+        }
     }
-    public void gripper(float upDown) {
-
+    public void gripper(boolean clicked) {
+        servoGripper.setPosition(clicked ? 0.8 : 0.4);
     }
 }
