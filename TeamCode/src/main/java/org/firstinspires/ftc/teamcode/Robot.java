@@ -8,8 +8,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 
-
-
 public class Robot {
     private DcMotor motorFL; //front left -1 to 1 forward and back
     private DcMotor motorFR; //front right -1 to 1
