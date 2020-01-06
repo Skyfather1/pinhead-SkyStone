@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Robot {
     private DcMotor motorFL; //front left -1 to 1 forward and back
@@ -88,6 +89,6 @@ public class Robot {
         return false;
     }
     public void gripper(boolean clicked) {
-        servoGripper.setPosition(clicked ? 0.8 : 0.4);
+        gripper.setPosition(clicked ? 0.8 : 0.4);
     }
 }
