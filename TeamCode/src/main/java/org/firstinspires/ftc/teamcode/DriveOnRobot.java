@@ -32,7 +32,7 @@ public class DriveOnRobot extends LinearOpMode {
         //init move class.
         Robot robot = new Robot(hardwareMap);
         while(robot.elevator((float)-0.5) == true);
-        robot.elevator()
+        robot.elevator();
         robot.gripper(false);
 
         telemetry.addData("Status", "Initialized");
@@ -41,7 +41,7 @@ public class DriveOnRobot extends LinearOpMode {
         // OwO Await big red buttion press.
         waitForStart();
 
-        boolean gripper = false
+        boolean gripper = false;
         robot.gripper(gripper);
         while (opModeIsActive()) {
             goPlaces = (float) gamepad1.right_trigger - gamepad1.left_trigger;
