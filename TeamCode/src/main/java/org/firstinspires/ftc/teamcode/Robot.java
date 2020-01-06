@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 public class Robot {
     private DcMotor motorFL; //front left -1 to 1 forward and back
@@ -76,10 +80,15 @@ public class Robot {
         motorBL.setPower(toMotorBL * motorMove);
         motorBR.setPower(toMotorBR * motorMove);
     }
-    public void elevator(float upDown) {
-
+    public boolean elevator(float upDown) {
+        upDown = Range.clip(upDown, -1, 1);
+        if((elevatorSensor.getDistance(DistanceUnit.MM) < 220 || upDown < 0) || (elevatorLimit.getState() != true || upDown > 0)) {
+            elevator.setPower(upDown);
+            return true;
+        }
+        return false;
     }
-    public void gripper(float upDown) {
-
+    public void gripper(boolean clicked) {
+        servoGripper.setPosition(clicked ? 0.8 : 0.4);
     }
 }

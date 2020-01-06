@@ -31,17 +31,26 @@ public class DriveOnRobot extends LinearOpMode {
 
         //init move class.
         Robot robot = new Robot(hardwareMap);
+        while(robot.elevator((float)-0.5) == true);
+        robot.elevator()
+        robot.gripper(false);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
         // OwO Await big red buttion press.
         waitForStart();
+
+        boolean gripper = false
+        robot.gripper(gripper);
         while (opModeIsActive()) {
             goPlaces = (float) gamepad1.right_trigger - gamepad1.left_trigger;
             rotate = (float) ((gamepad1.right_bumper ? 1 : 0) - (gamepad1.left_bumper ? 1 : 0));
             sideToSide = (float) gamepad1.left_stick_x;
             robot.drive(goPlaces, rotate, sideToSide, (float)1);
+            robot.elevator(gamepad1.left_stick_y);
+            robot.gripper(gripper);
+
         }
     }
 }
