@@ -32,7 +32,6 @@ public class DriveOnRobot extends LinearOpMode {
         //init move class.
         Robot robot = new Robot(hardwareMap);
         while(robot.elevator((float)-0.5) == true);
-        robot.elevator();
         robot.gripper(false);
 
         telemetry.addData("Status", "Initialized");
