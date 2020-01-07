@@ -82,7 +82,10 @@ public class Robot {
     }
     public boolean elevator(float upDown) {
         upDown = Range.clip(upDown, -1, 1);
-        if(!(elevatorSensor.getDistance(DistanceUnit.MM) <= 220 && upDown < 0) || !(elevatorLimit.getState() != true && upDown > 0)) {
+        if((elevatorLimit.getState() == false || upDown > 0)) {
+            elevator.setPower(upDown);
+            return true;
+        } else if (elevatorSensor.getDistance(DistanceUnit.MM) <= 220 || upDown < 0) {
             elevator.setPower(upDown);
             return true;
         }
