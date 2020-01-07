@@ -98,6 +98,6 @@ public class Robot {
         gripper.setPosition(clicked ? 0.8 : 0.4);
     }
     public void tray(boolean clicked) {
-        gripper.setPosition(clicked ? 0.8 : 0.3);
+        trayGrab.setPosition(clicked ? 0.8 : 0.3);
     }
 }
