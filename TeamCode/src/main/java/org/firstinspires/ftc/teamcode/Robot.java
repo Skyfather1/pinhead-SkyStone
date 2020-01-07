@@ -94,4 +94,7 @@ public class Robot {
     public void gripper(boolean clicked) {
         gripper.setPosition(clicked ? 0.8 : 0.4);
     }
+    public void tray(boolean clicked) {
+        gripper.setPosition(clicked ? 0.8 : 0.3);
+    }
 }
