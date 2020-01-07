@@ -20,6 +20,9 @@ public class Robot {
     Servo gripper;
     Servo trayGrab;
 
+    static final double ticksInch = 753.2 / (3.1415 * 4);
+    static final double ticksDegree = ticksInch * 24 * 3.1415 / 360;
+
     private HardwareMap hardwareMap = null;
     public Robot(HardwareMap hardwareMap_) {
         hardwareMap = hardwareMap_;
