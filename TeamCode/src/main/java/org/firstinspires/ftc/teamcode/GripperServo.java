@@ -6,11 +6,13 @@ package org.firstinspires.ftc.teamcode;
  * Goal: Move the block gripper servo open and closed via a button press
  */
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "GripperServo", group = "")
+@Disabled
 
 public class GripperServo extends LinearOpMode {
 

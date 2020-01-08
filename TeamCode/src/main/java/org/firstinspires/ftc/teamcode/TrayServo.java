@@ -6,11 +6,13 @@ package org.firstinspires.ftc.teamcode;
  * Goal: Move the tray gripper servo up and down via a button press
  */
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "TrayServo", group = "")
+@Disabled
 
 public class TrayServo extends LinearOpMode {
 

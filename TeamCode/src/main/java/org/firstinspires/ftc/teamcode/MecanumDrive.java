@@ -7,12 +7,14 @@ package org.firstinspires.ftc.teamcode;
  * Joystick inputs can be altered for x, y, and rotation
  */
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "MecanumDrive", group = "")
+@Disabled
 
 public class MecanumDrive extends LinearOpMode {
 
