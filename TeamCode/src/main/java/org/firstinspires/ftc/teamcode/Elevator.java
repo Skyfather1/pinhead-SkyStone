@@ -9,6 +9,7 @@ package org.firstinspires.ftc.teamcode;
  * Currently Non-Functional - error = "Stuck in stop() -- may be servo?"
  */
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
@@ -17,6 +18,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "Elevator", group = "")
+@Disabled
 
 public class Elevator extends LinearOpMode {
 

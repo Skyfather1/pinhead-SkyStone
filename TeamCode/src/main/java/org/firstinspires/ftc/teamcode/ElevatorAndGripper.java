@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode;
  * Elevator control combined with Gripper
  */
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -15,6 +16,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "ElevatorAndGripper", group = "")
+@Disabled
 
 public class ElevatorAndGripper extends LinearOpMode {
 

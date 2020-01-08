@@ -76,7 +76,7 @@ public class CompleteTeleOp extends LinearOpMode {
 
         // lower elevator until limit switch is depressed
         while (digElevatorLimit.getState() == false) {
-            motorElevator.setPower(-0.4);
+            motorElevator.setPower(-0.6);
         }
         motorElevator.setPower(0);
         double elevatorInput = 0;
@@ -84,7 +84,6 @@ public class CompleteTeleOp extends LinearOpMode {
         // initialize tray servo position
         servoGripper.setPosition(gripper_open);
         servoTray.setPosition(tray_up);
-
 
         // slow mode coefficients
         boolean slow_pressed = false;
@@ -155,16 +154,18 @@ public class CompleteTeleOp extends LinearOpMode {
             motorDriveFrontRight.setPower(rightFront * slowDownCoeff);
 
             // manual joystick control
-            elevatorInput = -gamepad1.left_trigger + gamepad1.right_trigger;
+            elevatorInput = -gamepad2.left_trigger + gamepad2.right_trigger;
             double measured_distance = sensorRange.getDistance(DistanceUnit.MM);
 
             // if limit switch is depressed, elevator can only raise and level is set to 0
             if (digElevatorLimit.getState() == true) {
                 elevatorInput = Range.clip(elevatorInput, 0, 1);
-            } else if (measured_distance > 250) {
-                elevatorInput = Range.clip(elevatorInput, -1, 0.5);
-            } else if (measured_distance > 260) {
+            } else if (measured_distance < 20) {
+                elevatorInput = Range.clip(elevatorInput, -0.6, 1);
+            } else if (measured_distance > 310) {
                 elevatorInput = Range.clip(elevatorInput, -1, 0);
+            } else if (measured_distance > 300) {
+                elevatorInput = Range.clip(elevatorInput, -1, 0.5);
             }
 
             // set elevator motor speed
@@ -172,11 +173,11 @@ public class CompleteTeleOp extends LinearOpMode {
 
             // gripper servo logic & control
             if (gripper_press == false) {
-                if (gamepad1.dpad_left == true) {
+                if (gamepad2.dpad_left == true) {
                     servoGripper.setPosition(gripper_open);
                     gripper_state = "OPEN";
                     gripper_press = true;
-                } else if (gamepad1.dpad_right == true) {
+                } else if (gamepad2.dpad_right == true) {
                     servoGripper.setPosition(gripper_closed);
                     gripper_state = "CLOSED";
                     gripper_press = true;
@@ -184,18 +185,18 @@ public class CompleteTeleOp extends LinearOpMode {
                     gripper_press = false;
                 }
             } else{
-                if (gamepad1.dpad_left == false && gamepad1.dpad_right == false){
+                if (gamepad2.dpad_left == false && gamepad2.dpad_right == false){
                     gripper_press = false;
                 }
             }
 
             // tray servo logic & control
             if (tray_press == false) {
-                if (gamepad1.y == true) {
+                if (gamepad2.y == true) {
                     servoTray.setPosition(tray_up);
                     tray_state = "UP";
                     tray_press = true;
-                } else if (gamepad1.a == true) {
+                } else if (gamepad2.a == true) {
                     servoTray.setPosition(tray_down);
                     tray_state = "DOWN";
                     tray_press = true;
@@ -203,7 +204,7 @@ public class CompleteTeleOp extends LinearOpMode {
                     tray_press = false;
                 }
             } else{
-                if (gamepad1.y == false && gamepad1.a == false){
+                if (gamepad2.y == false && gamepad2.a == false){
                     tray_press = false;
                 }
             }

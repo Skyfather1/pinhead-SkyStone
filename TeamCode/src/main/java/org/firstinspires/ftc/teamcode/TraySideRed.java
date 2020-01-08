@@ -2,26 +2,24 @@ package org.firstinspires.ftc.teamcode;
 
 /**
  * Author: Daan Stevenson
- * Created: 12/23/19
- * Goal: Simple autonomous control using encoders
+ * Created: 1/6/19
+ * Goal: Autonomous mode to drag tray into scoring zone and park on line
+ * Team: RED
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
-@Autonomous(name = "EncoderDrive", group = "")
-@Disabled
+@Autonomous(name = "TraySideRed", group = "")
 
-public class EncoderDrive extends LinearOpMode {
+public class TraySideRed extends LinearOpMode {
 
     // initialize I/O
     private DcMotor motorDriveBackLeft;
@@ -31,6 +29,7 @@ public class EncoderDrive extends LinearOpMode {
     private DcMotorSimple motorElevator;
     private DigitalChannel digElevatorLimit;
     private DistanceSensor sensorRange;
+    private ColorSensor downwardColorSensor;
     Servo servoGripper;
     Servo   servoTray;
 
@@ -71,6 +70,7 @@ public class EncoderDrive extends LinearOpMode {
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
         servoTray = hardwareMap.get(Servo.class, "servoTray");
         sensorRange = hardwareMap.get(DistanceSensor.class, "sensor_range");
+        downwardColorSensor = hardwareMap.get(ColorSensor.class, "downwardColorSensor");
 
         // set the digital channel to input.
         digElevatorLimit.setMode(DigitalChannel.Mode.INPUT);
@@ -90,19 +90,32 @@ public class EncoderDrive extends LinearOpMode {
         // initializing telemetry
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        driveCrab(0.4,  -36,  10.0);  // S3: Crab right 10 Inches with 5 Sec timeout
-        //sleep(1000);     // pause for servos to move
-        tankTurn( 0.5, 180, 10.0);  // S2: Rotate 90 degrees right with 2 Sec timeout
-        //sleep(1000);     // pause for servos to move
-        driveStraight(0.5,  -24,  10.0);  // S1: Forward 10 Inches with 5 Sec timeout
-        //sleep(1000);     // pause for servos to move
+        driveStraight(0.5,  -32,  10.0);
         servoTray.setPosition(tray_down);
-        sleep(2000);     // pause for servos to move
-        driveStraight(0.5,  24,  10.0);  // S1: Forward 10 Inches with 5 Sec timeout
+        sleep(1500);
+        tankTurn( 0.5, -45, 10.0);
+        driveStraight(0.5,  40,  10.0);
+        servoTray.setPosition(tray_up);
+        sleep(1500);
+        driveStraight(0.5,  6,  10.0);
+        tankTurn( 0.5, 45, 10.0);
 
+        while (opModeIsActive() && downwardColorSensor.red() < 2000) {
+            motorDriveBackLeft.setPower(0.25);
+            motorDriveBackRight.setPower(0.25);
+            motorDriveFrontLeft.setPower(0.25);
+            motorDriveFrontRight.setPower(0.25);
+        }
+        motorDriveBackLeft.setPower(0);
+        motorDriveBackRight.setPower(0);
+        motorDriveFrontLeft.setPower(0);
+        motorDriveFrontRight.setPower(0);
+
+        driveStraight(0.5,  -6,  10.0);  // S1: Forward 10 Inches with 5 Sec timeout
 
         // telemetry update
         telemetry.addData("Path", "Complete");
