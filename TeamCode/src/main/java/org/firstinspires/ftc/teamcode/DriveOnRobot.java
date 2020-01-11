@@ -32,24 +32,24 @@ public class DriveOnRobot extends LinearOpMode {
         //init move class.
         Robot robot = new Robot(hardwareMap);
 
+        robot.gripper(false);
+        robot.tray(false);
         while(robot.elevator((float)-0.4) == true);
 
-        robot.gripper(false);
         boolean gripper = false;
+
+        boolean trayPress = false;
+        boolean trayDrag = false;
 
         boolean slowMode = false;
         boolean slowPress = false;
         float slowSpeed = 1;
-
-        boolean trayPress = false;
-        boolean trayDrag = false;
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
         // OwO Await big red button press.
         waitForStart();
-        robot.gripper(gripper);
         while (opModeIsActive()) {
             if (gamepad1.x) {
                 if (!slowPress) {
