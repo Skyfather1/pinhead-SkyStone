@@ -85,14 +85,20 @@ public class Robot {
     }
     public boolean elevator(float upDown) {
         upDown = Range.clip(upDown, -1, 1);
-        if(!elevatorLimit.getState() || upDown > 0) {
+        if(elevatorLimit.getState()) {
+            if (upDown > 0) {
                 elevator.setPower(upDown);
                 return true;
-        } else if (elevatorSensor.getDistance(DistanceUnit.MM) >= 220 || upDown < 0) {
+            } else return false;
+        } else if (elevatorSensor.getDistance(DistanceUnit.MM) >= 220) {
+            if(upDown < 0) {
+                elevator.setPower(upDown);
+                return true;
+            } else return false;
+        } else {
             elevator.setPower(upDown);
             return true;
         }
-        return false;
     }
     public void gripper(boolean clicked) {
         gripper.setPosition(clicked ? 0.8 : 0.4);
