@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 /**
- * Author: Daan Stevenson
+ * Author: Pinhead FTC
  * Created: 12/2/19
  * Goal: Messy compilation of all code necessary for TeleOp Control
  */

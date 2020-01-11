@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 /**
- * Author: Daan Stevenson
+ * Author: Pinhead FTC
  * Created: 1/6/19
  * Goal: Autonomous mode to drag tray into scoring zone and park on line
  * Team: RED
