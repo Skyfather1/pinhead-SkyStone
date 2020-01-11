@@ -97,12 +97,17 @@ public class TraySideRed extends LinearOpMode {
         driveStraight(0.5,  -32,  10.0);
         servoTray.setPosition(tray_down);
         sleep(1500);
-        driveStraight(0.5,  10,  10.0);
-        driveTurn(0.5, 40, "left", 10);
-        driveStraight(0.5,  -20,  10.0);
+        driveStraight(0.5,  -1.0,  2.0);
+        driveStraight(0.5,  34.0,  10.0);
+        tankTurn(0.5,15,2);
         servoTray.setPosition(tray_up);
         sleep(1500);
-        driveStraight(0.5,  30,  10.0);
+        tankTurn(0.5,-15,2);
+        driveStraight(0.5,  1,  2.0);
+        driveCrab(0.5, 30, 10.0);
+        driveStraight(.5,-3,10.0);
+        tankTurn( 0.5,90,10);
+        driveStraight(.5,20,10.0);
 
         // use encoders
         motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -110,18 +115,18 @@ public class TraySideRed extends LinearOpMode {
         motorDriveFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorDriveFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        while (opModeIsActive() && downwardColorSensor.red() < 2000) {
-            motorDriveBackLeft.setPower(0.25);
-            motorDriveBackRight.setPower(0.25);
-            motorDriveFrontLeft.setPower(0.25);
-            motorDriveFrontRight.setPower(0.25);
-        }
+//        while (opModeIsActive() && downwardColorSensor.red() < 2000) {
+//            motorDriveBackLeft.setPower(0.25);
+//            motorDriveBackRight.setPower(0.25);
+//            motorDriveFrontLeft.setPower(0.25);
+//            motorDriveFrontRight.setPower(0.25);
+//        }
         motorDriveBackLeft.setPower(0);
         motorDriveBackRight.setPower(0);
         motorDriveFrontLeft.setPower(0);
         motorDriveFrontRight.setPower(0);
 
-        driveStraight(0.5,  -6,  10.0);
+        //driveStraight(0.5,  -6,  10.0);
 
         // telemetry update
         telemetry.addData("Path", "Complete");
