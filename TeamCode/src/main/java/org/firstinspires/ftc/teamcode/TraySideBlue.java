@@ -97,12 +97,12 @@ public class TraySideBlue extends LinearOpMode {
         driveStraight(0.5,  -32,  10.0);
         servoTray.setPosition(tray_down);
         sleep(1500);
-        driveStraight(0.5,  20,  10.0);
+        driveStraight(0.5,  10,  10.0);
         driveTurn(0.5, 40, "right", 10);
         driveStraight(0.5,  -20,  10.0);
         servoTray.setPosition(tray_up);
         sleep(1500);
-        driveStraight(0.5,  40,  10.0);
+        driveStraight(0.5,  30,  10.0);
 
         // use encoders
         motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -121,7 +121,7 @@ public class TraySideBlue extends LinearOpMode {
         motorDriveFrontLeft.setPower(0);
         motorDriveFrontRight.setPower(0);
 
-        driveStraight(0.5,  -6,  10.0);  // S1: Forward 10 Inches with 5 Sec timeout
+        driveStraight(0.5,  -6,  10.0);
 
         // telemetry update
         telemetry.addData("Path", "Complete");

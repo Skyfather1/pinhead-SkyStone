@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 /**
  * Author: Pinhead FTC
- * Created: 1/6/19
- * Goal: Autonomous mode to drag tray into scoring zone and park on line
- * Team: RED
+ * Created: 1/10/19
+ * Goal: Autonomous mode to grab block, deposit across line, and park on line
+ * Team: BLUE
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,9 +17,9 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "TraySideRed", group = "")
+@Autonomous(name = "BlockSideBlue", group = "")
 
-public class TraySideRed extends LinearOpMode {
+public class BlockSideBlue extends LinearOpMode {
 
     // initialize I/O
     private DcMotor motorDriveBackLeft;
@@ -94,15 +94,15 @@ public class TraySideRed extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        driveStraight(0.5,  -32,  10.0);
-        servoTray.setPosition(tray_down);
+        driveStraight(0.5,  34,  10.0);
+        servoGripper.setPosition(gripper_closed);
         sleep(1500);
-        driveStraight(0.5,  10,  10.0);
-        driveTurn(0.5, 40, "left", 10);
+        motorElevator.setPower(1);
+        sleep(1000);
+        motorElevator.setPower(0);
         driveStraight(0.5,  -20,  10.0);
-        servoTray.setPosition(tray_up);
-        sleep(1500);
-        driveStraight(0.5,  30,  10.0);
+        tankTurn(0.5, -90, 10);
+        driveStraight(0.5,  20,  10.0);
 
         // use encoders
         motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -110,7 +110,7 @@ public class TraySideRed extends LinearOpMode {
         motorDriveFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorDriveFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        while (opModeIsActive() && downwardColorSensor.red() < 2000) {
+        while (opModeIsActive() && downwardColorSensor.blue() < 2000) {
             motorDriveBackLeft.setPower(0.25);
             motorDriveBackRight.setPower(0.25);
             motorDriveFrontLeft.setPower(0.25);
@@ -121,6 +121,8 @@ public class TraySideRed extends LinearOpMode {
         motorDriveFrontLeft.setPower(0);
         motorDriveFrontRight.setPower(0);
 
+        servoGripper.setPosition(gripper_open);
+        sleep(1500);
         driveStraight(0.5,  -6,  10.0);
 
         // telemetry update
