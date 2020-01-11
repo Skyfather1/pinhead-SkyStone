@@ -17,9 +17,9 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "TraySideRed", group = "")
+@Autonomous(name = "TraySideBlue", group = "")
 
-public class TraySideRed extends LinearOpMode {
+public class TraySideBlue extends LinearOpMode {
 
     // initialize I/O
     private DcMotor motorDriveBackLeft;
@@ -97,12 +97,12 @@ public class TraySideRed extends LinearOpMode {
         driveStraight(0.5,  -32,  10.0);
         servoTray.setPosition(tray_down);
         sleep(1500);
-        tankTurn( 0.5, -45, 10.0);
+        tankTurn( 0.5, 45, 10.0);
         driveStraight(0.5,  40,  10.0);
         servoTray.setPosition(tray_up);
         sleep(1500);
         driveStraight(0.5,  6,  10.0);
-        tankTurn( 0.5, 45, 10.0);
+        tankTurn( 0.5, -45, 10.0);
 
         // use encoders
         motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -110,7 +110,7 @@ public class TraySideRed extends LinearOpMode {
         motorDriveFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorDriveFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        while (opModeIsActive() && downwardColorSensor.red() < 2000) {
+        while (opModeIsActive() && downwardColorSensor.blue() < 2000) {
             motorDriveBackLeft.setPower(0.25);
             motorDriveBackRight.setPower(0.25);
             motorDriveFrontLeft.setPower(0.25);
