@@ -97,12 +97,12 @@ public class TraySideBlue extends LinearOpMode {
         driveStraight(0.5,  -32,  10.0);
         servoTray.setPosition(tray_down);
         sleep(1500);
-        tankTurn( 0.5, 45, 10.0);
-        driveStraight(0.5,  40,  10.0);
+        driveStraight(0.5,  20,  10.0);
+        driveTurn(0.5, 40, "right", 10);
+        driveStraight(0.5,  -20,  10.0);
         servoTray.setPosition(tray_up);
         sleep(1500);
-        driveStraight(0.5,  6,  10.0);
-        tankTurn( 0.5, -45, 10.0);
+        driveStraight(0.5,  40,  10.0);
 
         // use encoders
         motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -286,6 +286,74 @@ public class TraySideBlue extends LinearOpMode {
 
                 // Display it for the driver.
                 telemetry.addData("Crabbing",String.valueOf(inches) + " inches");
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            motorDriveBackLeft.setPower(0);
+            motorDriveBackRight.setPower(0);
+            motorDriveFrontLeft.setPower(0);
+            motorDriveFrontRight.setPower(0);
+
+            //  sleep(250);   // optional pause after each move
+        }
+    }
+
+    public void driveTurn(double speed,
+                          double inches,
+                          String side,
+                          double timeoutS) {
+
+        // Ensure that the opmode is still active
+        if (opModeIsActive()) {
+
+            // reset encoders
+            motorDriveBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motorDriveBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motorDriveFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motorDriveFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            // set target position
+            if (side == "right") {
+                motorDriveBackRight.setTargetPosition((int)(inches * counts_per_inch));
+                motorDriveFrontRight.setTargetPosition((int)(inches * counts_per_inch));
+
+                // use encoders
+                motorDriveBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                motorDriveFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                // reset the timeout time and start motion.
+                runtime.reset();
+                motorDriveBackRight.setPower(Math.abs(speed));
+                motorDriveFrontRight.setPower(Math.abs(speed));
+
+            } else if (side == "left") {
+                motorDriveBackLeft.setTargetPosition((int)(inches * counts_per_inch));
+                motorDriveFrontLeft.setTargetPosition((int)(inches * counts_per_inch));
+
+                // use encoders
+                motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                motorDriveFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                // reset the timeout time and start motion.
+                runtime.reset();
+                motorDriveBackLeft.setPower(Math.abs(speed));
+                motorDriveFrontLeft.setPower(Math.abs(speed));
+
+            }
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            // Note: logic is such that it runs until at least one wheel in the front,
+            // AND at least one wheel in the back have completed distance
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    ((motorDriveBackLeft.isBusy() && motorDriveFrontLeft.isBusy()) || (motorDriveBackRight.isBusy() && motorDriveFrontRight.isBusy()))) {
+
+                // O X    O O    X O    X O
+                // O X    X X    O X    O O
+
+                // Display it for the driver.
+                telemetry.addData("Turn " + side + " side",String.valueOf(inches) + " inches");
                 telemetry.update();
             }
 
