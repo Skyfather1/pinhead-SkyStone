@@ -86,18 +86,15 @@ public class Robot {
     public boolean elevator(float upDown) {
         upDown = Range.clip(upDown, -1, 1);
         if(elevatorLimit.getState()) {
-            if (upDown > 0) {
+            if (upDown >= 0) {
                 elevator.setPower(upDown);
                 return true;
             } else {return false;}
         } else if (elevatorSensor.getDistance(DistanceUnit.MM) >= 220) {
-            if(upDown < 0) {
+            if(upDown <= 0) {
                 elevator.setPower(upDown);
                 return true;
             } else {return false;}
-        } else if(upDown == 0 ) {
-            elevator.setPower(0);
-            return true;
         } else {
             elevator.setPower(upDown);
             return true;
