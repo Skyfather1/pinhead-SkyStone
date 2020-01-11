@@ -93,7 +93,7 @@ public class Robot {
                 elevator.setPower(0);
                 return false;
             }
-        } else if (elevatorSensor.getDistance(DistanceUnit.MM) >= 220) {
+        } else if (elevatorSensor.getDistance(DistanceUnit.MM) >= 250) {
             if(upDown <= 0) {
                 elevator.setPower(upDown);
                 return true;
