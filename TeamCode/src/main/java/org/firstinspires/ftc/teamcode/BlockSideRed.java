@@ -94,37 +94,36 @@ public class BlockSideRed extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        driveStraight(0.5,  34,  10.0);
+        driveStraight(0.5,  36,  10.0);
         servoGripper.setPosition(gripper_closed);
         sleep(1500);
         motorElevator.setPower(1);
         sleep(1000);
         motorElevator.setPower(0);
-        driveStraight(0.5,  -20,  10.0);
-        tankTurn(0.5, 90, 10);
-        driveStraight(0.5,  20,  10.0);
+        driveStraight(0.5,  -32,  10.0);
+        tankTurn(0.5, 95, 10);
+        driveStraight(0.5,  70,  10.0);
+
 
         // use encoders
-        motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorDriveBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorDriveFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorDriveFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        while (opModeIsActive() && downwardColorSensor.red() < 2000) {
-            motorDriveBackLeft.setPower(0.25);
-            motorDriveBackRight.setPower(0.25);
-            motorDriveFrontLeft.setPower(0.25);
-            motorDriveFrontRight.setPower(0.25);
-        }
-        motorDriveBackLeft.setPower(0);
-        motorDriveBackRight.setPower(0);
-        motorDriveFrontLeft.setPower(0);
-        motorDriveFrontRight.setPower(0);
-
+//        motorDriveBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        motorDriveBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        motorDriveFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        motorDriveFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//        while (opModeIsActive() && downwardColorSensor.red() < 2000) {
+//            motorDriveBackLeft.setPower(0.25);
+//            motorDriveBackRight.setPower(0.25);
+//            motorDriveFrontLeft.setPower(0.25);
+//            motorDriveFrontRight.setPower(0.25);
+//        }
+//        motorDriveBackLeft.setPower(0);
+//        motorDriveBackRight.setPower(0);
+//        motorDriveFrontLeft.setPower(0);
+//        motorDriveFrontRight.setPower(0);
         servoGripper.setPosition(gripper_open);
         sleep(1500);
-        driveStraight(0.5,  -6,  10.0);
-
+        driveStraight(0.5,  -10,  10.0);
         // telemetry update
         telemetry.addData("Path", "Complete");
         telemetry.update();
