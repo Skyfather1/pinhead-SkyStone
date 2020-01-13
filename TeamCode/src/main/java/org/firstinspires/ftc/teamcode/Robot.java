@@ -6,24 +6,26 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class Robot {
-    private DcMotor motorFL; //front left -1 to 1 forward and back
-    private DcMotor motorFR; //front right -1 to 1
-    private DcMotor motorBL; //back left -1 to 1
-    private DcMotor motorBR; //back right -1 to 1
-    private DcMotorSimple elevator; //elevator motor -1 to 1 to up or down.
-    private DigitalChannel elevatorLimit; //limmit switch at bottom
+    //RobotVarables robotVars = new RobotVarables();
+    protected DcMotor motorFL; //front left -1 to 1 forward and back
+    protected DcMotor motorFR; //front right -1 to 1
+    protected DcMotor motorBL; //back left -1 to 1
+    protected DcMotor motorBR; //back right -1 to 1
+    protected DcMotorSimple elevator; //elevator motor -1 to 1 to up or down.
+    protected DigitalChannel elevatorLimit; //limmit switch at bottom
     //distance sensor on elevator lower numbers at bottom
-    private DistanceSensor elevatorSensor;
-    Servo gripper;
-    Servo trayGrab;
+    protected DistanceSensor elevatorSensor;
+    private ColorSensor colorDown; //color sensor at the bottom of the robot
+    protected Servo gripper; //block grabber at front of robot
+    protected Servo trayGrab; //lil grabber at back of bot
 
-    static final double ticksInch = 753.2 / (3.1415 * 4);
-    static final double ticksDegree = ticksInch * 24 * 3.1415 / 360;
-
-    private HardwareMap hardwareMap = null;
+    private HardwareMap hardwareMap;
+    protected ElapsedTime runtime = new ElapsedTime();
     public Robot(HardwareMap hardwareMap_) {
         hardwareMap = hardwareMap_;
         //Ni-chan! Don't forget hardware.
@@ -35,6 +37,7 @@ public class Robot {
         elevator = hardwareMap.get(DcMotorSimple.class, "motorElevator");
         elevatorLimit = hardwareMap.get(DigitalChannel.class, "digElevatorLimit");
         elevatorSensor = hardwareMap.get(DistanceSensor.class, "sensor_range");
+        colorDown = hardwareMap.get(ColorSensor.class, "downwardColorSensor");
 
         //
         this.motorFL.setDirection(DcMotor.Direction.FORWARD);
